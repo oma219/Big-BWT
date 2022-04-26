@@ -31,11 +31,11 @@ add_executable(simplebwt simplebwt.c gsa/gsacak.c)
 add_executable(simplebwt64 simplebwt.c gsa/gsacak.c)
 target_compile_options(simplebwt64 PUBLIC -DM64)
 
-add_executable(newscanNT.x newscan.cpp malloc_count.c utils.c)
+add_executable(newscanNT.x newscan.cpp utils.c)
 target_link_libraries(newscanNT.x z dl)
 target_compile_options(newscanNT.x PUBLIC -DNOTHREADS) 
 
-add_executable(newscan.x newscan.cpp malloc_count.c utils.c xerrors.c)
+add_executable(newscan.x newscan.cpp utils.c xerrors.c)
 target_link_libraries(newscan.x z dl pthread)
 target_compile_options(newscan.x PUBLIC -DM64) 
 
