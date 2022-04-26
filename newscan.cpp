@@ -437,7 +437,7 @@ void remapParse(Args &arg, map<uint64_t,word_stats> &wfreq)
 
 
 void print_help(char** argv, Args &args) {
-  cout << "Usage: " << argv[ 0 ] << " <input filename> [options]" << endl;
+  cout << "Usage: " << argv[ 0 ] << " -i <input filename> [options]" << endl;
   cout << "  Options: " << endl
         << "\t-w W\tsliding window size, def. " << args.w << endl
         << "\t-p M\tmodulo for defining phrases, def. " << args.p << endl
@@ -463,7 +463,7 @@ void parseArgs( int argc, char** argv, Args& arg ) {
   puts("");
 
    string sarg;
-   while ((c = getopt( argc, argv, "p:w:fsht:v") ) != -1) {
+   while ((c = getopt( argc, argv, "p:w:fsht:vi:") ) != -1) {
       switch(c) {
         case 's':
         arg.SAinfo = true; break;
@@ -482,6 +482,9 @@ void parseArgs( int argc, char** argv, Args& arg ) {
         arg.th = stoi( sarg ); break;
         case 'v':
            arg.verbose++; break;
+        case 'i':
+          arg.inputFileName.assign(optarg);
+          break;
         case 'h':
            print_help(argv, arg); exit(1);
         case '?':
@@ -494,9 +497,6 @@ void parseArgs( int argc, char** argv, Args& arg ) {
    if (argc == 1) {
       cout << "Invalid number of arguments" << endl;
       print_help(argv,arg);
-   }
-   else {
-      arg.inputFileName.assign(argv[1]);
    }
 
    // check algorithm parameters
